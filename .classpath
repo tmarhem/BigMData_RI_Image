@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/Bloum/Downloads/javacv-platform-1.4.2-bin/javacv-bin/javacpp.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bloum/Downloads/javacv-platform-1.4.2-bin/javacv-bin/javacv.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bloum/Downloads/javacv-platform-1.4.2-bin/javacv-bin/javacv-platform.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bloum/Downloads/javacv-platform-1.4.2-bin/javacv-bin/opencv.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bloum/Downloads/javacv-platform-1.4.2-bin/javacv-bin/opencv-platform.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bloum/Downloads/javacv-platform-1.4.2-bin/javacv-bin/opencv-windows-x86.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bloum/Downloads/javacv-platform-1.4.2-bin/javacv-bin/opencv-windows-x86_64.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
