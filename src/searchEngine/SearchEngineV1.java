@@ -1,6 +1,7 @@
 package searchEngine;
 
 import java.util.Vector;
+import utils.JavaCVTools;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.MatVector;
 import indexing.LinearSearchIndex;
@@ -9,7 +10,7 @@ public class SearchEngineV1 extends SearchEngine {
 	
 	
 	LinearSearchIndex LSI = new LinearSearchIndex();
-	MatVector descriptors;
+	MatVector descriptors = new MatVector();
 	
 	public SearchEngineV1() {
 		this.database = new Vector<ImageInfo>(); 
@@ -18,18 +19,17 @@ public class SearchEngineV1 extends SearchEngine {
 	public void indexDatabase() {
 		int count = 0;
 		for(ImageInfo e : database) {
-			System.out.println("index");
-			Mat color_hist = utils.JavaCVTools.computeColorHistogram(e.getImage(),0);
+			e.loadImage();
+			Mat color_hist = JavaCVTools.computeColorHistogram(e.getImage(),16);
 			descriptors.put(color_hist);
 			count++;
-			System.out.println(count);
 		}
 		LSI.index(descriptors);
-		System.out.println("I indexed " + count + "descriptors");
+		System.out.println("I indexed " + descriptors.toString().length() + " descriptors");
+		System.out.println("count : " + count);
 	}
-	
+	/*
 	public Vector<ImageInfo> queryDatabase( ImageInfo queryImage ){
 		return database;
-		
-	}
-	}
+	}		*/
+}
