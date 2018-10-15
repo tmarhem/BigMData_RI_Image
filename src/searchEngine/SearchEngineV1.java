@@ -20,7 +20,7 @@ public class SearchEngineV1 extends SearchEngine {
 	LinearSearchIndex LSI = new LinearSearchIndex();
 	MatVector descriptors = new MatVector();
 	DMatchVectorVector matches = new DMatchVectorVector();
-	 
+ 
 	public SearchEngineV1() {
 		this.database = new Vector<ImageInfo>(); 
 	}
@@ -36,21 +36,22 @@ public class SearchEngineV1 extends SearchEngine {
 		LSI.index(descriptors);
 		System.out.println("Number of descriptors? " + descriptors.toString().length());
 		System.out.println("count : " + count);
+		
 	}
 
 	@Override
 	public Vector<ImageInfo> queryDatabase(ImageInfo queryImage) {
 		Vector<ImageInfo> results = new Vector<ImageInfo>();
+		queryImage.loadImage();
 		Mat queryImage_desc = JavaCVTools.computeColorHistogram(queryImage.getImage(),16);
-		matches= LSI.epsQuery(queryImage_desc, 0);
-		System.out.println(matches.size());
+		matches = LSI.knnQuery(queryImage_desc, 50);
 		for(int i=0; i<matches.size();i++) {
-			DMatchVector test = matches.get(i);
-			for(int j =0; j<test.size(); j++) {
-				DMatch result = test.get(j);
-				int image_index = result.imgIdx();
+			for(int j=0; j<matches.get(i).size();j++) {
+				System.out.println("i'm here");
+				int image_index = matches.get(i).get(j).imgIdx();
+				System.out.println(image_index);
 				results.addElement(database.get(image_index));
-			}
+				}
 		}
 		return results;
 	}
