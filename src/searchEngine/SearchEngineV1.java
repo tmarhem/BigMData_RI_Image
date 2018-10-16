@@ -18,7 +18,6 @@ public class SearchEngineV1 extends SearchEngine {
 	
 
 	LinearSearchIndex LSI = new LinearSearchIndex();
-	MatVector descriptors = new MatVector();
 	DMatchVectorVector matches = new DMatchVectorVector();
  
 	public SearchEngineV1() {
@@ -27,10 +26,11 @@ public class SearchEngineV1 extends SearchEngine {
 	
 	public void indexDatabase() {
 		int count = 0;
+		MatVector descriptors = new MatVector(database.size());
 		for(ImageInfo e : database) {
 			e.loadImage();
 			Mat color_hist = JavaCVTools.computeColorHistogram(e.getImage(),16);
-			descriptors.put(color_hist);
+			descriptors.put(count,color_hist);
 			count++;
 		}
 		LSI.index(descriptors);
@@ -44,7 +44,7 @@ public class SearchEngineV1 extends SearchEngine {
 		Vector<ImageInfo> results = new Vector<ImageInfo>();
 		queryImage.loadImage();
 		Mat queryImage_desc = JavaCVTools.computeColorHistogram(queryImage.getImage(),16);
-		matches = LSI.knnQuery(queryImage_desc, 50);
+		matches = LSI.epsQuery(queryImage_desc, 30);
 		for(int i=0; i<matches.size();i++) {
 			for(int j=0; j<matches.get(i).size();j++) {
 				System.out.println("i'm here");
